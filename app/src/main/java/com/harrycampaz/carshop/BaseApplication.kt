@@ -4,8 +4,8 @@ import android.app.Application
 import com.harrycampaz.carshop.data.DatabaseHelper
 import com.harrycampaz.carshop.data.car.CarRepository
 import com.harrycampaz.carshop.data.category.CategoryRepository
-import com.harrycampaz.carshop.ui.viewmodel.car.CarViewModelProviderFactory
-import com.harrycampaz.carshop.ui.viewmodel.category.CategoryViewModelProviderFactory
+import com.harrycampaz.carshop.viewmodel.car.CarViewModelProviderFactory
+import com.harrycampaz.carshop.viewmodel.category.CategoryViewModelProviderFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule

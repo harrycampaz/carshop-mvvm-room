@@ -8,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.harrycampaz.carshop.R
-import com.harrycampaz.carshop.ui.viewmodel.car.CarViewModel
-import com.harrycampaz.carshop.ui.viewmodel.car.CarViewModelProviderFactory
+import com.harrycampaz.carshop.viewmodel.car.CarViewModel
+import com.harrycampaz.carshop.viewmodel.car.CarViewModelProviderFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

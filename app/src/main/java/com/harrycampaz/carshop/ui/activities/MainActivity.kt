@@ -1,9 +1,10 @@
-package com.harrycampaz.carshop
+package com.harrycampaz.carshop.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.harrycampaz.carshop.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setActionBar(toolbarMain)
-        NavigationUI.setupWithNavController(bnv_menu, Navigation.findNavController(this, R.id.frag_content))
+        NavigationUI.setupWithNavController(bnv_menu, Navigation.findNavController(this,
+            R.id.frag_content
+        ))
     }
 }

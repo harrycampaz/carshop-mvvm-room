@@ -1,6 +1,5 @@
-package com.harrycampaz.carshop.ui.viewmodel.car
+package com.harrycampaz.carshop.viewmodel.car
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.harrycampaz.carshop.data.car.CarRepository

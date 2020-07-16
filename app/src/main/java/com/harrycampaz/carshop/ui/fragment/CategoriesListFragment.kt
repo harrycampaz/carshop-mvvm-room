@@ -8,15 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harrycampaz.carshop.R
 import com.harrycampaz.carshop.model.Category
 import com.harrycampaz.carshop.ui.adapter.CategoryAdapter
 import com.harrycampaz.carshop.ui.dialog.AddCategory
 import com.harrycampaz.carshop.ui.listener.AddCategoryDialogListener
-import com.harrycampaz.carshop.ui.viewmodel.category.CategoryViewModel
-import com.harrycampaz.carshop.ui.viewmodel.category.CategoryViewModelProviderFactory
+import com.harrycampaz.carshop.viewmodel.category.CategoryViewModel
+import com.harrycampaz.carshop.viewmodel.category.CategoryViewModelProviderFactory
 import kotlinx.android.synthetic.main.fragment_categories_list.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

@@ -1,4 +1,4 @@
-package com.harrycampaz.carshop.ui.viewmodel.car
+package com.harrycampaz.carshop.viewmodel.car
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

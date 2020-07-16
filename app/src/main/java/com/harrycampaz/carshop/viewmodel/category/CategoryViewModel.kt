@@ -1,7 +1,5 @@
-package com.harrycampaz.carshop.ui.viewmodel.category
+package com.harrycampaz.carshop.viewmodel.category
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.harrycampaz.carshop.data.category.CategoryRepository
 import com.harrycampaz.carshop.model.Category
