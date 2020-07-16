@@ -5,4 +5,9 @@
     <string name="inicio">Inicio</string>
     <string name="categorias">Categorias</string>
     <string name="perfil">Perfil</string>
+    <string name="agregar_categoria">Agregar Categoria</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="agregar">Agregar</string>
+    <string name="nombre">Nombre</string>
+    <string name="aun_no_hay_registro">Aun no hay Registro</string>
 </resources>

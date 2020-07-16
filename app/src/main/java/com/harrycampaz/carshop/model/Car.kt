@@ -1,6 +1,7 @@
 package com.harrycampaz.carshop.model
 
-import androidx.room.Entity
+import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 import java.io.Serializable
 import java.util.*
 
@@ -8,10 +9,20 @@ import java.util.*
     tableName = "car"
 )
 data class Car (
-    var id: Int,
-    var seat: Int,
-    var isNew: Boolean,
-    var model:String,
-    var dateRelease: Date
 
-): Serializable
+    @PrimaryKey(autoGenerate = true)
+    var id: Int ? = 0,
+    var seat: Int?,
+    var isNew: Boolean?,
+    var model: String?,
+    var dateRelease: Date?,
+//    @Ignore
+//    var category: Category?,
+
+    var batteryCapacity: Double?,
+    var maxPayload: Double?,
+    var spaceCapacity: Double?
+//    @ForeignKey(entity = Category::class,parentColumns = ["id"], childColumns = ["categoryId"], onDelete = CASCADE)
+//    var categoryId: Int
+
+)
