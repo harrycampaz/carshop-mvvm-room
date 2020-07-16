@@ -8,4 +8,6 @@ class CarRepository(private val databaseHelper: DatabaseHelper){
     suspend fun insert(car: Car) = databaseHelper.carDao().insert(car)
     fun getAllCars()= databaseHelper.carDao().getAllCars()
 
+    fun getCarWithCategory() = databaseHelper.carDao().getCarWithCategory()
+
 }

@@ -16,6 +16,7 @@ import com.harrycampaz.carshop.model.Converters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 @Database(entities = [Category::class, Car::class], version = DatabaseHelper.DATABASE_VERSION)
@@ -60,12 +61,28 @@ abstract class DatabaseHelper: RoomDatabase() {
                 val electric = Category(Categories.ELECTRIC.id, "electric")
                 val truck = Category(Categories.TRUCK.id, "truck")
                 val commercial = Category(Categories.COMMERCIAL.id, "commercial")
+//
+//                var seat: Int?,
+//                var isNew: Boolean?,
+//                var model: String?,
+//                var dateRelease: Date?,
+
+                val carUno = Car(id = 1, seat = 3, price = 20000.0, isNew = true, model = "Mazda", dateRelease = 2010, categoryId = 2)
+                val caDos = Car(id = 2, seat = 2, isNew =  false,price = 32000.0, model = "Nissan", dateRelease = 2011, categoryId = 1)
+
+                val carTres = Car(id = 3, seat = 1, isNew = true,price = 4000.0, model = "Lobo", dateRelease = 2092, categoryId = 2)
+                val caCuatro = Car(id = 4, seat = 5, isNew = false, price = 25000.0, model = "Homda", dateRelease = 2010, categoryId = 3)
 
                 instance?.run {
                     CoroutineScope(Dispatchers.IO).launch {
                         categoryDao().insert(category = electric)
                         categoryDao().insert(category = truck)
                         categoryDao().insert(category = commercial)
+
+                        carDao().insert(carUno)
+                        carDao().insert(caDos)
+                        carDao().insert(carTres)
+                        carDao().insert(caCuatro)
                     }
                 }
             }

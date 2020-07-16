@@ -1,4 +1,4 @@
-package com.harrycampaz.carshop.ui.fragment
+package com.harrycampaz.carshop.ui.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.harrycampaz.carshop.ui.fragment
+package com.harrycampaz.carshop.ui.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harrycampaz.carshop.R
+import com.harrycampaz.carshop.model.Car
 import com.harrycampaz.carshop.model.Category
 import com.harrycampaz.carshop.ui.adapter.CategoryAdapter
-import com.harrycampaz.carshop.ui.dialog.AddCategory
+import com.harrycampaz.carshop.ui.listener.AddCarDialogListener
+import com.harrycampaz.carshop.ui.view.dialog.AddCategory
 import com.harrycampaz.carshop.ui.listener.AddCategoryDialogListener
+import com.harrycampaz.carshop.ui.view.dialog.AddCarDialog
 import com.harrycampaz.carshop.viewmodel.category.CategoryViewModel
 import com.harrycampaz.carshop.viewmodel.category.CategoryViewModelProviderFactory
 import kotlinx.android.synthetic.main.fragment_categories_list.*
@@ -25,7 +28,7 @@ import org.kodein.di.generic.instance
 
 private const val TAG = "CategoriesListFragment"
 
-class CategoriesListFragment : Fragment(), KodeinAware {
+class CategoriesListFragment : Fragment(), AddCarDialogListener, KodeinAware {
 
     override val kodein: Kodein by closestKodein()
 
@@ -46,7 +49,7 @@ class CategoriesListFragment : Fragment(), KodeinAware {
         // val viewModel = ViewModelProviders.of(this, factory).get(CategoryViewModel::class.java)
         val viewModel = ViewModelProvider(this, factory).get(CategoryViewModel::class.java)
 
-        val adapter = CategoryAdapter(listOf())
+        val adapter = CategoryAdapter(listOf(),this)
         rv_category.layoutManager = LinearLayoutManager(context)
         rv_category.adapter = adapter
 
@@ -57,7 +60,6 @@ class CategoriesListFragment : Fragment(), KodeinAware {
         })
 
         fab_category.setOnClickListener {
-            Log.e(TAG, "onViewCreated: Clien en" )
             context?.let { contextSafe ->
                 AddCategory(contextSafe, object : AddCategoryDialogListener {
                     override fun onAddButtonClicked(item: Category) {
@@ -66,7 +68,14 @@ class CategoriesListFragment : Fragment(), KodeinAware {
                 }).show()
             }
 
+        }
+    }
 
+    override fun onAddButtonClicked(item: Category) {
+        Log.e(TAG, "onAddButtonClicked: $item")
+
+        context?.let {
+            AddCarDialog(it, item).show()
         }
     }
 }

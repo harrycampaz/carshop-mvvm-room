@@ -15,13 +15,15 @@ data class Car (
     var seat: Int?,
     var isNew: Boolean?,
     var model: String?,
-    var dateRelease: Date?,
+    var price: Double?,
+    var dateRelease: Int?,
 //    @Ignore
 //    var category: Category?,
+    var categoryId: Int?,
 
-    var batteryCapacity: Double?,
-    var maxPayload: Double?,
-    var spaceCapacity: Double?
+    var batteryCapacity: Double? = null,
+    var maxPayload: Double? = null,
+    var spaceCapacity: Double? = null
 //    @ForeignKey(entity = Category::class,parentColumns = ["id"], childColumns = ["categoryId"], onDelete = CASCADE)
 //    var categoryId: Int
 

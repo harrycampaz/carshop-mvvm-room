@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.harrycampaz.carshop.ui.fragment.HomeFragment"
+        android:name="com.harrycampaz.carshop.ui.view.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_category"
-        android:name="com.harrycampaz.carshop.ui.fragment.CategoriesListFragment"
+        android:name="com.harrycampaz.carshop.ui.view.fragment.CategoriesListFragment"
         android:label="fragment_categories_list"
         tools:layout="@layout/fragment_categories_list" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.harrycampaz.carshop.ui.fragment.ProfileFragment"
+        android:name="com.harrycampaz.carshop.ui.view.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

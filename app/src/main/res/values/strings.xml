@@ -10,4 +10,15 @@
     <string name="agregar">Agregar</string>
     <string name="nombre">Nombre</string>
     <string name="aun_no_hay_registro">Aun no hay Registro</string>
+    <string name="categoria">Categoria:</string>
+    <string name="Precio">Precio: </string>
+    <string name="asientos">Asientos</string>
+    <string name="carro_nuevo">Carro Nuevo ?</string>
+    <string name="selected_item">Selecionar</string>
+
+
+    <string-array name="isNew">
+        <item>Si</item>
+        <item>No</item>
+    </string-array>
 </resources>

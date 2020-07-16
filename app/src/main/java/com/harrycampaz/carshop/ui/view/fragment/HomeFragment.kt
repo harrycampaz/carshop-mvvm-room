@@ -1,14 +1,17 @@
-package com.harrycampaz.carshop.ui.fragment
+package com.harrycampaz.carshop.ui.view.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import com.harrycampaz.carshop.R
+import com.harrycampaz.carshop.ui.adapter.CarAdapter
 import com.harrycampaz.carshop.viewmodel.car.CarViewModel
 import com.harrycampaz.carshop.viewmodel.car.CarViewModelProviderFactory
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -38,17 +41,29 @@ class HomeFragment : Fragment(),KodeinAware {
 
         val viewModel = ViewModelProvider(this, factory).get(CarViewModel::class.java)
 
-        viewModel.getAllCars().observe(viewLifecycleOwner, Observer { cars->
+        val adapter = CarAdapter(listOf())
 
-            Log.e(TAG, "onViewCreated: ${cars.size}")
-            if(cars.isEmpty()){
+        rv_car.layoutManager = GridLayoutManager(context, 2)
+        rv_car.addItemDecoration(DividerItemDecoration(context, GridLayoutManager.VERTICAL))
+
+        rv_car.adapter = adapter
+
+        viewModel.getCarWithCategory().observe(viewLifecycleOwner, Observer { carWithCategory->
+
+            Log.e(TAG, "onViewCreated: ${carWithCategory.size}")
+            if(carWithCategory.isEmpty()){
                viewModel.isResultNotFound()
+            }else {
+               adapter.items = carWithCategory
+                adapter.notifyDataSetChanged()
             }
         })
 
         viewModel.resultNotFound.observe(viewLifecycleOwner, Observer {noResult ->
             if(noResult){
                 ll_no_found.visibility = View.VISIBLE
+            }else {
+                ll_no_found.visibility = View.INVISIBLE
             }
         })
 

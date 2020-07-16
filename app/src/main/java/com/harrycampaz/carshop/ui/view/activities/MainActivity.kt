@@ -1,4 +1,4 @@
-package com.harrycampaz.carshop.ui.activities
+package com.harrycampaz.carshop.ui.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -29,6 +29,7 @@ class BaseApplication: Application(), KodeinAware {
             }
             bind() from provider {
                 CarViewModelProviderFactory(
+                    instance(),
                     instance()
                 )
             }
