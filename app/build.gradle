@@ -45,6 +45,10 @@ dependencies {
     def room_version = "2.2.5"
     def kodein_version = "6.4.0"
     def lifecycle_version = "2.2.0"
+    def nav_version = "2.3.0"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Room and Architectural Components
     implementation "androidx.room:room-runtime:$room_version"

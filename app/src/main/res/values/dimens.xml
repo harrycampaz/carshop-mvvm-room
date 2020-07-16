@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="alto_logo">45dp</dimen>
+    <dimen name="toolbar_alto">30dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+
+    <dimen name="alto_image_view_home">150dp</dimen>
+
+    <dimen name="size_title">20sp</dimen>
+
+    <dimen name="margin_home_title">10dp</dimen>
+
+    <dimen name="margin_card">15dp</dimen>
+
+    <dimen name="size_resp">15sp</dimen>
+
+    <dimen name="size_text_item_hour">30sp</dimen>
+    <dimen name="size_text_item_subtitle_hour">20sp</dimen>
+
+</resources>
