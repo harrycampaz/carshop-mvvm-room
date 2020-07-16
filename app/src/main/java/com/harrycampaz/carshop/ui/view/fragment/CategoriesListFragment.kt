@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +14,8 @@ import com.harrycampaz.carshop.R
 import com.harrycampaz.carshop.model.Car
 import com.harrycampaz.carshop.model.Category
 import com.harrycampaz.carshop.ui.adapter.CategoryAdapter
-import com.harrycampaz.carshop.ui.listener.AddCarDialogListener
+import com.harrycampaz.carshop.ui.listener.OnItemCarListener
+import com.harrycampaz.carshop.ui.listener.ShowFormCarDialogListener
 import com.harrycampaz.carshop.ui.view.dialog.AddCategory
 import com.harrycampaz.carshop.ui.listener.AddCategoryDialogListener
 import com.harrycampaz.carshop.ui.view.dialog.AddCarDialog
@@ -28,11 +30,13 @@ import org.kodein.di.generic.instance
 
 private const val TAG = "CategoriesListFragment"
 
-class CategoriesListFragment : Fragment(), AddCarDialogListener, KodeinAware {
+class CategoriesListFragment : Fragment(), ShowFormCarDialogListener, KodeinAware {
 
     override val kodein: Kodein by closestKodein()
 
     private val factory: CategoryViewModelProviderFactory by instance<CategoryViewModelProviderFactory>()
+
+    lateinit var  viewModel: CategoryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +51,7 @@ class CategoriesListFragment : Fragment(), AddCarDialogListener, KodeinAware {
 
 
         // val viewModel = ViewModelProviders.of(this, factory).get(CategoryViewModel::class.java)
-        val viewModel = ViewModelProvider(this, factory).get(CategoryViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(CategoryViewModel::class.java)
 
         val adapter = CategoryAdapter(listOf(),this)
         rv_category.layoutManager = LinearLayoutManager(context)
@@ -75,7 +79,13 @@ class CategoriesListFragment : Fragment(), AddCarDialogListener, KodeinAware {
         Log.e(TAG, "onAddButtonClicked: $item")
 
         context?.let {
-            AddCarDialog(it, item).show()
+            AddCarDialog(it, item, object : OnItemCarListener {
+                override fun onItemCarClicked(item: Car) {
+                    viewModel.insertCarByCategory(item)
+                    Toast.makeText(context, "Carro guardado correctamente", Toast.LENGTH_SHORT).show()
+                }
+
+            }).show()
         }
     }
 }

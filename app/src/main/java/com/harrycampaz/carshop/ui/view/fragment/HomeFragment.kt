@@ -5,13 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.harrycampaz.carshop.R
+import com.harrycampaz.carshop.model.Car
 import com.harrycampaz.carshop.ui.adapter.CarAdapter
+import com.harrycampaz.carshop.ui.listener.OnItemCarListener
+import com.harrycampaz.carshop.ui.view.dialog.EditCarDialog
 import com.harrycampaz.carshop.viewmodel.car.CarViewModel
 import com.harrycampaz.carshop.viewmodel.car.CarViewModelProviderFactory
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -22,7 +26,7 @@ import org.kodein.di.generic.instance
 
 
 private const val TAG = "HomeFragment"
-class HomeFragment : Fragment(),KodeinAware {
+class HomeFragment : Fragment(),OnItemCarListener, KodeinAware {
 
     override val kodein: Kodein by closestKodein()
 
@@ -41,7 +45,7 @@ class HomeFragment : Fragment(),KodeinAware {
 
         val viewModel = ViewModelProvider(this, factory).get(CarViewModel::class.java)
 
-        val adapter = CarAdapter(listOf())
+        val adapter = CarAdapter(listOf(), this)
 
         rv_car.layoutManager = GridLayoutManager(context, 2)
         rv_car.addItemDecoration(DividerItemDecoration(context, GridLayoutManager.VERTICAL))
@@ -67,6 +71,18 @@ class HomeFragment : Fragment(),KodeinAware {
             }
         })
 
+    }
+
+    override fun onItemCarClicked(item: Car) {
+       context?.let {
+           EditCarDialog(it, item, object : OnItemCarListener{
+               override fun onItemCarClicked(item: Car) {
+                   Log.e(TAG, "POr Aca : $item" )
+                   Toast.makeText(context, "Carro editado correctamente", Toast.LENGTH_SHORT).show()
+               }
+
+           }).show()
+       }
     }
 
 }

@@ -11,18 +11,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CarViewModel(val carRepository: CarRepository, val categoryRepository: CategoryRepository): ViewModel() {
+class CarViewModel(val carRepository: CarRepository): ViewModel() {
 
     var resultNotFound = MutableLiveData<Boolean>()
 
-    var allCategories:  LiveData<List<Category>> = categoryRepository.getCategories()
 
 
     fun insert(car: Car) = CoroutineScope(Dispatchers.Main).launch {
         carRepository.insert(car)
     }
 
-    fun getAllCars() = carRepository.getAllCars()
 
 
     fun getCarWithCategory() = carRepository.getCarWithCategory()

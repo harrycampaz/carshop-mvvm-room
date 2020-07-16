@@ -79,10 +79,10 @@ abstract class DatabaseHelper: RoomDatabase() {
                         categoryDao().insert(category = truck)
                         categoryDao().insert(category = commercial)
 
-                        carDao().insert(carUno)
-                        carDao().insert(caDos)
-                        carDao().insert(carTres)
-                        carDao().insert(caCuatro)
+//                        carDao().insert(carUno)
+//                        carDao().insert(caDos)
+//                        carDao().insert(carTres)
+//                        carDao().insert(caCuatro)
                     }
                 }
             }

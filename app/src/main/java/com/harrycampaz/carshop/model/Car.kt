@@ -11,7 +11,7 @@ import java.util.*
 data class Car (
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int ? = 0,
+    var id: Int ? = null,
     var seat: Int?,
     var isNew: Boolean?,
     var model: String?,

@@ -15,6 +15,9 @@
     <string name="asientos">Asientos</string>
     <string name="carro_nuevo">Carro Nuevo ?</string>
     <string name="selected_item">Selecionar</string>
+    <string name="a_o">Año:</string>
+    <string name="editar">Editar</string>
+    <string name="mi_perfil">Mi Perfil</string>
 
 
     <string-array name="isNew">

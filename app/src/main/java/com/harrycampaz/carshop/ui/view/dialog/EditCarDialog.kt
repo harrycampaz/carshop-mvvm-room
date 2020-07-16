@@ -10,30 +10,31 @@ import androidx.appcompat.app.AppCompatDialog
 import com.harrycampaz.carshop.R
 import com.harrycampaz.carshop.data.category.Categories
 import com.harrycampaz.carshop.model.Car
-import com.harrycampaz.carshop.model.Category
 import com.harrycampaz.carshop.ui.listener.OnItemCarListener
 import kotlinx.android.synthetic.main.add_car_dialog.*
+import kotlinx.android.synthetic.main.edit_car_dialog.*
 
 
 private const val TAG = "AddCarDialog"
-class AddCarDialog(context: Context, val category: Category, val onItemCarListener: OnItemCarListener): AppCompatDialog(context) {
+class EditCarDialog(context: Context, private val carEdit: Car, private val onItemCarListener: OnItemCarListener): AppCompatDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_car_dialog)
+        setContentView(R.layout.edit_car_dialog)
 
 
         var isNew = true
 
-        tv_title_add_car.text = "Agregar Carro: ${category.name.toUpperCase()}"
-        var isSpecifyCategory = setupSpecifyCategory()
+        val isSpecifyCategory = setupSpecifyCategory()
+
+        loadCar()
 
         val optionIsNew = context.resources.getStringArray(R.array.isNew)
 
         val adapter = ArrayAdapter(context,
             android.R.layout.simple_spinner_item, optionIsNew)
-        spinner.adapter = adapter
+        spinner_edit.adapter = adapter
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinner_edit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
 
@@ -43,11 +44,11 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
 
         }
 
-        btn_cancel_car.setOnClickListener {
+        btn_cancel_edit.setOnClickListener {
             dismiss()
         }
 
-        btn_send_car.setOnClickListener {
+        btn_send_edit.setOnClickListener {
             if (isSpecifyCategory){
                 sendToSpecifyCategory(isNew)
             }else {
@@ -56,16 +57,23 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
         }
     }
 
+    fun loadCar(){
+        et_edit_car_model.setText(carEdit.model.toString())
+        et_edit_price.setText(carEdit.price.toString())
+        et_num_set_edit.setText(carEdit.seat.toString())
+        etd_date_release_edit.setText(carEdit.dateRelease.toString())
+    }
+
     fun sendToSpecifyCategory(isNew: Boolean){
-        if(et_add_car_model.text.isNotEmpty() && et_add_price.text.isNotEmpty()
-            && et_num_set.text.isNotEmpty() && etd_date_release.text.isNotEmpty() && et_specify.text.isNotEmpty()){
+        if(et_edit_car_model.text.isNotEmpty() && et_edit_price.text.isNotEmpty()
+            && et_num_set_edit.text.isNotEmpty() && etd_date_release_edit.text.isNotEmpty() && et_specify_edit.text.isNotEmpty()){
 
             val car = Car(
                 price = et_add_price.text.toString().toDouble(),
                 model = et_add_car_model.text.toString(),
                 seat = et_num_set.text.toString().toInt(),
                 dateRelease = etd_date_release.text.toString().toInt(),
-                categoryId = category.id,
+                categoryId = carEdit.categoryId,
                 isNew = isNew
             )
 
@@ -77,15 +85,15 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
     }
 
     private fun sendToGenericCategory(isNew: Boolean){
-        if(et_add_car_model.text.isNotEmpty() && et_add_price.text.isNotEmpty()
-            && et_num_set.text.isNotEmpty() && etd_date_release.text.isNotEmpty()){
+        if(et_edit_car_model.text.isNotEmpty() && et_edit_price.text.isNotEmpty()
+            && et_num_set_edit.text.isNotEmpty() && etd_date_release_edit.text.isNotEmpty()){
 
             val car = Car(
                 price = et_add_price.text.toString().toDouble(),
                 model = et_add_car_model.text.toString(),
                 seat = et_num_set.text.toString().toInt(),
                 dateRelease = etd_date_release.text.toString().toInt(),
-                categoryId = category.id,
+                categoryId = carEdit.categoryId,
                 isNew = isNew
             )
             onItemCarListener.onItemCarClicked(car)
@@ -97,7 +105,7 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
     }
 
     private fun sendSpecifyCategory(car : Car) {
-        when(category.id){
+        when(carEdit.categoryId){
             Categories.ELECTRIC.id -> {
                 car.batteryCapacity = et_specify.text.toString().toDouble()
                 onItemCarListener.onItemCarClicked(car)
@@ -121,21 +129,26 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
 
 
     private fun setupSpecifyCategory(): Boolean {
-        when(category.id){
+        when(carEdit.categoryId){
             Categories.ELECTRIC.id -> {
-                et_specify.hint = "Capacidad Bateria (w) "
+                et_specify_edit.hint = "Capacidad Bateria (w) "
+               et_specify_edit.setText(carEdit.batteryCapacity.toString())
                 return true
             }
             Categories.TRUCK.id -> {
-                et_specify.hint = "Max Carga (Tm)"
+                et_specify_edit.hint = "Max Carga (Tm)"
+
+                et_specify_edit.setText(carEdit.maxPayload.toString())
                 return true
             }
             Categories.COMMERCIAL.id -> {
-                et_specify.hint = "Espacio Capacidad (m2)"
+                et_specify_edit.hint = "Espacio Capacidad (m2)"
+
+                et_specify_edit.setText(carEdit.spaceCapacity.toString())
                 return true
             }
             else -> {
-                et_specify.visibility = View.INVISIBLE
+                et_specify_edit.visibility = View.INVISIBLE
                 return false
             }
         }

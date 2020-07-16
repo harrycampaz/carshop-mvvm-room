@@ -24,12 +24,12 @@ class BaseApplication: Application(), KodeinAware {
             bind() from singleton { CarRepository(instance()) }
             bind() from provider {
                 CategoryViewModelProviderFactory(
+                    instance(),
                     instance()
                 )
             }
             bind() from provider {
                 CarViewModelProviderFactory(
-                    instance(),
                     instance()
                 )
             }
