@@ -69,10 +69,11 @@ class EditCarDialog(context: Context, private val carEdit: Car, private val onIt
             && et_num_set_edit.text.isNotEmpty() && etd_date_release_edit.text.isNotEmpty() && et_specify_edit.text.isNotEmpty()){
 
             val car = Car(
-                price = et_add_price.text.toString().toDouble(),
-                model = et_add_car_model.text.toString(),
-                seat = et_num_set.text.toString().toInt(),
-                dateRelease = etd_date_release.text.toString().toInt(),
+                id = carEdit.id,
+                price = et_edit_price.text.toString().toDouble(),
+                model = et_edit_car_model.text.toString(),
+                seat = et_num_set_edit.text.toString().toInt(),
+                dateRelease = etd_date_release_edit.text.toString().toInt(),
                 categoryId = carEdit.categoryId,
                 isNew = isNew
             )
@@ -89,10 +90,11 @@ class EditCarDialog(context: Context, private val carEdit: Car, private val onIt
             && et_num_set_edit.text.isNotEmpty() && etd_date_release_edit.text.isNotEmpty()){
 
             val car = Car(
-                price = et_add_price.text.toString().toDouble(),
-                model = et_add_car_model.text.toString(),
-                seat = et_num_set.text.toString().toInt(),
-                dateRelease = etd_date_release.text.toString().toInt(),
+                id = carEdit.id,
+                price = et_edit_price.text.toString().toDouble(),
+                model = et_edit_car_model.text.toString(),
+                seat = et_num_set_edit.text.toString().toInt(),
+                dateRelease = etd_date_release_edit.text.toString().toInt(),
                 categoryId = carEdit.categoryId,
                 isNew = isNew
             )
@@ -107,17 +109,17 @@ class EditCarDialog(context: Context, private val carEdit: Car, private val onIt
     private fun sendSpecifyCategory(car : Car) {
         when(carEdit.categoryId){
             Categories.ELECTRIC.id -> {
-                car.batteryCapacity = et_specify.text.toString().toDouble()
+                car.batteryCapacity = et_specify_edit.text.toString().toDouble()
                 onItemCarListener.onItemCarClicked(car)
                 dismiss()
             }
             Categories.TRUCK.id -> {
-                car.maxPayload = et_specify.text.toString().toDouble()
+                car.maxPayload = et_specify_edit.text.toString().toDouble()
                 onItemCarListener.onItemCarClicked(car)
                 dismiss()
             }
             Categories.COMMERCIAL.id -> {
-                car.spaceCapacity = et_specify.text.toString().toDouble()
+                car.spaceCapacity = et_specify_edit.text.toString().toDouble()
                 onItemCarListener.onItemCarClicked(car)
                 dismiss()
             }

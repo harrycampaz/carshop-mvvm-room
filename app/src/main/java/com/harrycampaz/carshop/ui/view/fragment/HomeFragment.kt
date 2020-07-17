@@ -32,6 +32,8 @@ class HomeFragment : Fragment(),OnItemCarListener, KodeinAware {
 
     private val factory: CarViewModelProviderFactory by instance<CarViewModelProviderFactory>()
 
+    lateinit var viewModel: CarViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,12 +45,12 @@ class HomeFragment : Fragment(),OnItemCarListener, KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(this, factory).get(CarViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(CarViewModel::class.java)
 
         val adapter = CarAdapter(listOf(), this)
 
         rv_car.layoutManager = GridLayoutManager(context, 2)
-        rv_car.addItemDecoration(DividerItemDecoration(context, GridLayoutManager.VERTICAL))
+       //  rv_car.addItemDecoration(DividerItemDecoration(context, GridLayoutManager.VERTICAL))
 
         rv_car.adapter = adapter
 
@@ -77,7 +79,7 @@ class HomeFragment : Fragment(),OnItemCarListener, KodeinAware {
        context?.let {
            EditCarDialog(it, item, object : OnItemCarListener{
                override fun onItemCarClicked(item: Car) {
-                   Log.e(TAG, "POr Aca : $item" )
+                   viewModel.upsert(item)
                    Toast.makeText(context, "Carro editado correctamente", Toast.LENGTH_SHORT).show()
                }
 

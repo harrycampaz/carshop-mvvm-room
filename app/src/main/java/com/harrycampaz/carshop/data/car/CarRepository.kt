@@ -5,9 +5,10 @@ import com.harrycampaz.carshop.model.Car
 
 class CarRepository(private val databaseHelper: DatabaseHelper){
 
-    suspend fun insert(car: Car) = databaseHelper.carDao().insert(car)
-    fun getAllCars()= databaseHelper.carDao().getAllCars()
+    suspend fun upsert(car: Car) = databaseHelper.carDao().upsert(car)
+
 
     fun getCarWithCategory() = databaseHelper.carDao().getCarWithCategory()
+
 
 }

@@ -16,7 +16,7 @@ class CategoryViewModel(private val categoryRepository: CategoryRepository, priv
     }
 
     fun insertCarByCategory(car: Car) = CoroutineScope(Dispatchers.Main).launch {
-        carRepository.insert(car)
+        carRepository.upsert(car)
     }
 
     fun getCategories() = categoryRepository.getCategories()

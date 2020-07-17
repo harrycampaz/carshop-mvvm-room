@@ -14,7 +14,7 @@ class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(carWithCategory: CarWithCategory, onItemCarListener: OnItemCarListener) {
 
         carWithCategory?.apply {
-            itemView.iv_item_car.setImageResource(R.drawable.ic_baseline_car_commercial)
+            itemView.iv_item_car.setImageResource(R.drawable.ic_baseline_generico)
             itemView.tv_item_car_name.text = car?.model
             itemView.tv_item_car_category.text = category?.name
             itemView.tv_item_car_precio.text = car?.price.toString()
@@ -22,7 +22,12 @@ class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.tv_item_car_date_release.text = car?.dateRelease.toString()
 
             car?.let {
+
                 showSpecifyProperty(it)
+            }
+
+            car?.isNew?.let {
+                showIsNew(it)
             }
 
             itemView.btn_edit.setOnClickListener {view->
@@ -32,19 +37,29 @@ class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 
+    private fun showIsNew(isNew: Boolean){
+        if(isNew){
+            itemView.tv_is_new.text = itemView.context.getString(R.string.isNew)
+        }else {
+            itemView.tv_is_new.text = itemView.context.getString(R.string.isUsed)
+        }
+    }
 
     private fun showSpecifyProperty(car: Car){
         when(car.categoryId){
             Categories.ELECTRIC.id -> {
+                itemView.iv_item_car.setImageResource(R.drawable.ic_baseline_local_car_electric)
                 itemView.tv_item_car_specify_name.text = "Capacidad de \nBateria:"
                 itemView.tv_item_car_specify_value.text = "${car.batteryCapacity} w"
                 itemView.btn_edit.visibility = View.INVISIBLE
             }
             Categories.TRUCK.id -> {
+                itemView.iv_item_car.setImageResource(R.drawable.ic_baseline_truck)
                 itemView.tv_item_car_specify_name.text = "Max Carga:"
                 itemView.tv_item_car_specify_value.text = "${car.maxPayload} Tm"
             }
             Categories.COMMERCIAL.id -> {
+                itemView.iv_item_car.setImageResource(R.drawable.ic_baseline_car_commercial)
                 itemView.tv_item_car_specify_name.text = "Espacio \ncapacidad: "
                 itemView.tv_item_car_specify_value.text = "${car.spaceCapacity} m2"
             }

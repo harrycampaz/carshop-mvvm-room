@@ -1,21 +1,19 @@
 package com.harrycampaz.carshop.data.car
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.harrycampaz.carshop.model.Car
 import com.harrycampaz.carshop.model.CarWithCategory
 
 @Dao
 interface CarDao {
 
-    @Insert
-    suspend fun insert(car: Car)
-
-    @Query("SELECT * FROM car")
-    fun getAllCars(): LiveData<List<Car>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(car: Car)
 
     @Query("SELECT * from car INNER JOIN category ON car.categoryId = category.idCategory")
     fun getCarWithCategory(): LiveData<List<CarWithCategory>>
+
+    @Update
+    suspend fun update(car: Car)
 }

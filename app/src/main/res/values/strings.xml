@@ -18,6 +18,8 @@
     <string name="a_o">Año:</string>
     <string name="editar">Editar</string>
     <string name="mi_perfil">Mi Perfil</string>
+    <string name="isNew">Nuevo</string>
+    <string name="isUsed">Usado</string>
 
 
     <string-array name="isNew">
