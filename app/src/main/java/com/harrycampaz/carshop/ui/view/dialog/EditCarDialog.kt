@@ -13,6 +13,7 @@ import com.harrycampaz.carshop.model.Car
 import com.harrycampaz.carshop.ui.listener.OnItemCarListener
 import kotlinx.android.synthetic.main.add_car_dialog.*
 import kotlinx.android.synthetic.main.edit_car_dialog.*
+import java.util.*
 
 
 private const val TAG = "AddCarDialog"
@@ -66,7 +67,7 @@ class EditCarDialog(context: Context, private val carEdit: Car, private val onIt
 
     fun sendToSpecifyCategory(isNew: Boolean){
         if(et_edit_car_model.text.isNotEmpty() && et_edit_price.text.isNotEmpty()
-            && et_num_set_edit.text.isNotEmpty() && etd_date_release_edit.text.isNotEmpty() && et_specify_edit.text.isNotEmpty()){
+            && validateSeat(et_num_set_edit.text.toString()) && validateYear(etd_date_release_edit.text.toString()) && et_specify_edit.text.isNotEmpty()){
 
             val car = Car(
                 id = carEdit.id,
@@ -81,13 +82,15 @@ class EditCarDialog(context: Context, private val carEdit: Car, private val onIt
             sendSpecifyCategory(car)
 
         } else {
-            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Datos no validos", Toast.LENGTH_SHORT).show()
         }
     }
 
+
+
     private fun sendToGenericCategory(isNew: Boolean){
         if(et_edit_car_model.text.isNotEmpty() && et_edit_price.text.isNotEmpty()
-            && et_num_set_edit.text.isNotEmpty() && etd_date_release_edit.text.isNotEmpty()){
+            && validateSeat(et_num_set_edit.text.toString()) && validateYear(etd_date_release_edit.text.toString())){
 
             val car = Car(
                 id = carEdit.id,
@@ -102,9 +105,33 @@ class EditCarDialog(context: Context, private val carEdit: Car, private val onIt
             dismiss()
 
         } else {
-            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Datos no validos", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun validateYear(year: String) : Boolean{
+
+        return try {
+            val parseYear = year.toInt()
+            parseYear in 1903..2021
+        }catch(e: NumberFormatException){
+            false
+        }
+
+    }
+
+    private fun validateSeat(seat: String) : Boolean{
+
+        return try {
+            val parseSeat = seat.toInt()
+            parseSeat in 1..15
+
+        }catch (e: NumberFormatException){
+            false
+        }
+
+    }
+
 
     private fun sendSpecifyCategory(car : Car) {
         when(carEdit.categoryId){

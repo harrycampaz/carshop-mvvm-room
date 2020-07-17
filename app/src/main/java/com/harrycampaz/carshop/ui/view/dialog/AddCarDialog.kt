@@ -58,7 +58,7 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
 
     fun sendToSpecifyCategory(isNew: Boolean){
         if(et_add_car_model.text.isNotEmpty() && et_add_price.text.isNotEmpty()
-            && et_num_set.text.isNotEmpty() && etd_date_release.text.isNotEmpty() && et_specify.text.isNotEmpty()){
+            && validateSeat(et_num_set.text.toString()) && validateYear(etd_date_release.text.toString()) && et_specify.text.isNotEmpty()){
 
             val car = Car(
                 price = et_add_price.text.toString().toDouble(),
@@ -72,13 +72,13 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
             sendSpecifyCategory(car)
 
         } else {
-            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Datos no validos", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun sendToGenericCategory(isNew: Boolean){
         if(et_add_car_model.text.isNotEmpty() && et_add_price.text.isNotEmpty()
-            && et_num_set.text.isNotEmpty() && etd_date_release.text.isNotEmpty()){
+            && validateSeat(et_num_set.text.toString()) && validateYear(etd_date_release.text.toString())){
 
             val car = Car(
                 price = et_add_price.text.toString().toDouble(),
@@ -92,10 +92,32 @@ class AddCarDialog(context: Context, val category: Category, val onItemCarListen
             dismiss()
 
         } else {
-            Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Datos no validos", Toast.LENGTH_SHORT).show()
         }
     }
 
+    private fun validateYear(year: String) : Boolean{
+
+        return try {
+            val parseYear = year.toInt()
+            parseYear in 1903..2021
+        }catch(e: NumberFormatException){
+            false
+        }
+
+    }
+
+    private fun validateSeat(seat: String) : Boolean{
+
+        return try {
+            val parseSeat = seat.toInt()
+            parseSeat in 1..15
+
+        }catch (e: NumberFormatException){
+            false
+        }
+
+    }
     private fun sendSpecifyCategory(car : Car) {
         when(category.id){
             Categories.ELECTRIC.id -> {
